@@ -1,7 +1,3 @@
-import java.io.IOError;
-import java.io.IOException;
-import java.lang.reflect.Array;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Entrance {
@@ -47,9 +43,9 @@ public class Entrance {
         }
 
         if (tmpVar < numbrsOfNode){
-            System.out.println("Number can't be empty. Try again...");
+            System.out.println("Number can't be empty. Try again....");
             return voidArr;
         }
         return arr;
-     }
+    }
 }

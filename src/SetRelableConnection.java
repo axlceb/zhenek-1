@@ -1,8 +1,4 @@
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.Map;
-import java.util.TreeMap;
 
 public class SetRelableConnection {
 
@@ -11,7 +7,6 @@ public class SetRelableConnection {
         int numbersOfNodes;
         int lengthConnection;
         int tmpRel;
-        //Object[] arrNodes;
         Node[] arrNodes;
         //TreeMap<Node, Integer> treeMapa = new TreeMap<>(Comparator.comparingInt(o -> o.numNode));
         Node DestinationElement;
@@ -49,7 +44,6 @@ public class SetRelableConnection {
                 num_tmp++;
             }
         }
-        //arrNodes = new Node[num_tmp];
         arrNodes = new Node[numbersOfNodes];
 
         Node node = new Node(1, 1);
@@ -57,61 +51,40 @@ public class SetRelableConnection {
         arrNodes[0] = node;
         //treeMapa.put(node, 1);
 
-        //int j = 1;
         for (int i = 2; i < numbersOfNodes; i++) {
             tmpRel = relableArr[i - 1];
-
-            //if (tmpRel == 1) {
-                node = new Node(i, tmpRel);
-                arrNodes[i - 1] = node;
-                //treeMapa.put(node, i);
-                //j = j ++;
-            //}
+            node = new Node(i, tmpRel);
+            arrNodes[i - 1] = node;
+            //treeMapa.put(node, i);
         }
         node = new Node(numbersOfNodes, 1);
-        //arrNodes[num_tmp - 1] = node;
         arrNodes[numbersOfNodes - 1] = node;
         DestinationElement = node;
         //treeMapa.put(node, numbersOfNodes);
-//--------------------------------------------------------------------------
+        //--------------------------------------------------------------------------
 
         for (int i = 0; i < arrNodes.length; i++) {
             node = (Node) arrNodes[i];
             int mtpNumNode = node.GetNumNode();
 
-            ArrayList<Node> arrChildNodes = Node.GetChildNodes(node, arrNodes);
+            ArrayList<Node> arrChildNodes = Node.GetChildNodes(node, arrNodes, numbersOfNodes);
             if (arrChildNodes.contains(DestinationElement)){
                 System.out.println("YES");
                 return;
             }
 
-            Node tmpChildNode;
-            for (int j = 0; j < arrChildNodes.size(); j++){
-                tmpChildNode = arrChildNodes[j];
-
-                ArrayList<Node> arrChildNodes = Node.GetChildNodes(tmpChildNode, arrNodes);
-                if (arrChildNodes.contains(DestinationElement)){
-                    System.out.println("YES");
-                    return;
-                }
+            String str = Node.RecursionVerifyWay(arrChildNodes, arrNodes, DestinationElement, numbersOfNodes);
+            if (str == "YES"){
+                System.out.println(str);
+                return;
+            }else{
+                System.out.println("NO");
+                return;
             }
-
 
             //Node tmpNode = treeMapa.navigableKeySet().stream().filter(nod -> nod.GetNumNode() > 3).findFirst().get();
             //Map<Node, Integer> childNodes = treeMapa.headMap(tmpNode, true);
-
         }
-
-        /*int numNode;
-        //lengthConnection
-        for (int i = 0; i < arrNodes.length; i++){
-            Object tmpNode = arrNodes[i];
-            numNode = tmpNode.numNode;
-
-        }*/
-
-
-        int kkk = 5;
-
+        System.out.println("NO");
     }
 }
