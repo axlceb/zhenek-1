@@ -10,6 +10,7 @@ public class Entrance {
         }
         return i;
     }
+
     public int[] SetRelablesString(int numbrsOfNode) {
         int[] arr = new int[numbrsOfNode];
         int[] voidArr = new int[0];
@@ -19,33 +20,35 @@ public class Entrance {
 
         int num = 0;
         int tmpVar = 0;
-        if (scanr.hasNextLine()){
+        if (scanr.hasNextLine()) {
 
             String StrIn = scanr.nextLine();
             char[] charArrIn = StrIn.toCharArray();
 
-            for (int i = 0; i < charArrIn.length; i++){
+            // use the recommendation from IntelliJ
+            // for (char c : charArrIn) {
+            for (int i = 0; i < charArrIn.length; i++) {
                 try {
                     num = Character.getNumericValue(charArrIn[i]);
-                    if (num < 0 || num > 1){
+                    if (num < 0 || num > 1) {
                         System.out.println("wrong number , try again...");
                         return voidArr;
-                    }else {
+                    } else {
                         arr[tmpVar] = num;
                         tmpVar++;
                     }
-                }
-                catch (NumberFormatException e){
+                } catch (NumberFormatException e) {
                     System.out.println("Atention! enter the number format against.");
                     return voidArr;
                 }
             }
         }
 
-        if (tmpVar < numbrsOfNode){
+        if (tmpVar < numbrsOfNode) {
             System.out.println("Number can't be empty. Try again....");
             return voidArr;
         }
+        // to many returns try to rethink you logic to avoid multiple returns in single method
         return arr;
     }
 }
